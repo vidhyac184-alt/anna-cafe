@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna Café | Authentic South Indian Flavors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b4332; /* Deep Temple Green */
+            --secondary: #d4a373; /* Warm Gold / Sambar Tone */
+            --accent: #b7094c; /* Accent red */
+            --light: #fefae0; /* Creamy Rice */
+            --dark: #2b2d42;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--secondary);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Page Management Sections */
+        .page-section {
+            display: none;
+            min-height: 80vh;
+            padding: 4rem 5%;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section (Home) */
+        .hero {
+            background: linear-gradient(rgba(27,67,50,0.85), rgba(27,67,50,0.85)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: #e9edc9;
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #faedcd;
+            transform: translateY(-2px);
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 3rem;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-card-content {
+            padding: 1.5rem;
+        }
+
+        .menu-card-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-card-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* About Us Styles */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @media(max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        @media(max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="logo">🌿 Anna Café</div>
+        <nav>
+            <ul>
+                <li><a onclick="switchPage('home')" class="nav-link active" id="link-home">Home</a></li>
+                <li><a onclick="switchPage('about')" class="nav-link" id="link-about">About Us</a></li>
+                <li><a onclick="switchPage('menu')" class="nav-link" id="link-menu">Menu</a></li>
+                <li><a onclick="switchPage('contact')" class="nav-link" id="link-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page-section active-page">
+        <div class="hero">
+            <h1>Welcome to Anna Café</h1>
+            <p>Experience the authentic taste of South India, prepared with heritage recipes, freshly ground spices, and pure love served on a banana leaf.</p>
+            <button class="btn" onclick="switchPage('menu')">Explore Our Menu</button>
+        </div>
+        <div style="margin-top: 4rem; text-align: center;">
+            <h2 class="section-title">Our Specialties</h2>
+            <p class="section-subtitle">Handcrafted dishes straight from traditional southern kitchens</p>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Idli & Vada">
+                    <div class="menu-card-content">
+                        <h3>Thattu Idli & Medu Vada</h3>
+                        <p>Fluffy steamed rice cakes and crispy golden lentil donuts served with 3 varieties of chutneys.</p>
+                        <span class="price">₹120</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_720,h_420,c_fill/RX_THUMBNAIL/IMAGES/VENDOR/2025/4/22/bd7d893e-fb96-4781-a89d-b25b60c1bc5c_52431.jpg" alt="Masala Dosa">
+                    <div class="menu-card-content">
+                        <h3>Ghee Roast Masala Dosa</h3>
+                        <p>Crispy crepe cooked in pure ghee, stuffed with spiced potato mash and served with hot sambar.</p>
+                        <span class="price">₹160</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Filter Coffee">
+                    <div class="menu-card-content">
+                        <h3>Madras Degree Coffee</h3>
+                        <p>Traditional frothy South Indian filter coffee brewed with fresh chicory and rich milk.</p>
+                        <span class="price">₹50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US PAGE -->
+    <section id="about" class="page-section">
+        <h2 class="section-title">Our Heritage</h2>
+        <p class="section-subtitle">The story behind Anna Café</p>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Rooted in Tradition, Crafted with Passion</h3>
+                <p>Founded in 2020, Anna Café brings the soul-satisfying flavors of Tamil Nadu, Kerala, and Karnataka straight to your table. Our master chefs use time-honored techniques, stone-ground batters, and hand-selected spices imported directly from Southern farms.</p>
+                <p style="margin-top: 1rem;">Whether it is the morning aroma of freshly brewed filter coffee or the crispy crackle of a ghee roast dosa, every bite tells a story of heritage hospitality and authentic culinary artistry.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="South Indian Dining">
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU PAGE -->
+    <section id="menu" class="page-section">
+        <h2 class="section-title">Authentic South Indian Menu</h2>
+        <p class="section-subtitle">Savor the authentic delicacies made fresh daily</p>
+        
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Idli Vada">
+                <div class="menu-card-content">
+                    <h3>Classic Idli Vada Combo</h3>
+                    <p>2 soft idlis and 1 crispy medu vada served with coconut chutney and piping hot drumstick sambar.</p>
+                    <span class="price">₹110</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_720,h_420,c_fill/RX_THUMBNAIL/IMAGES/VENDOR/2025/4/22/bd7d893e-fb96-4781-a89d-b25b60c1bc5c_52431.jpg" alt="Mysore Masala Dosa">
+                <div class="menu-card-content">
+                    <h3>Mysore Masala Dosa</h3>
+                    <p>Dosa smeared with spicy red garlic chutney, filled with potato masala and a generous dollop of butter.</p>
+                    <span class="price">₹180</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Uttapam">
+                <div class="menu-card-content">
+                    <h3>Onion Tomato Uttapam</h3>
+                    <p>Thick, fluffy savory pancake topped with finely chopped onions, tomatoes, and fresh coriander leaves.</p>
+                    <span class="price">₹140</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Pongal">
+                <div class="menu-card-content">
+                    <h3>Ghee Ven Pongal</h3>
+                    <p>Comforting South Indian rice and moong dal dish tempered with whole black pepper, cumin, ginger, and cashews in ghee.</p>
+                    <span class="price">₹130</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Filter Coffee">
+                <div class="menu-card-content">
+                    <h3>South Indian Filter Coffee</h3>
+                    <p>The iconic aromatic drink served traditionally in a brass dabarah and tumbler set.</p>
+                    <span class="price">₹50</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmzwVpDDZKI94q02TGwft6fFpI7H_9yINIyhI7UsDUxc11KkbJ2g2IwMg&s=10" alt="Payasam">
+                <div class="menu-card-content">
+                    <h3>Elaneer Payasam</h3>
+                    <p>Traditional chilled dessert made with tender coconut pulp, coconut milk, and jaggery.</p>
+                    <span class="price">₹150</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact" class="page-section">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">We would love to serve you</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visit Anna Café</h3>
+                <p><strong>Address:</strong> 42, Heritage Spice Street, Near Temple Road, City Center</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Email:</strong> hello@annacafe.com</p>
+                <p><strong>Opening Hours:</strong><br>Monday – Sunday: 7:00 AM – 10:00 PM</p>
+            </div>
+            <div class="contact-form">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Send a Message</h3>
+                <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to Anna Café.');">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="4" required placeholder="Write your feedback or query..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Anna Café. All Rights Reserved. Crafted with South Indian Tradition.</p>
+    </footer>
+
+    <!-- JavaScript for Multi-Page Simulation -->
+    <script>
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Remove active class from nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active-page');
+
+            // Set active nav link
+            document.getElementById('link-' + pageId).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
